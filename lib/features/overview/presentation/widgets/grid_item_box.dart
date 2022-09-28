@@ -3,12 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GridItemBox extends StatelessWidget {
   final String title;
-  const GridItemBox({required this.title, super.key});
+  final VoidCallback onTap;
+  const GridItemBox({required this.title, required this.onTap, super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         width: 100.w,
         height: 100.w,

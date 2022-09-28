@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sw_fun_app/core/theme/colors.dart';
+import 'package:go_router/go_router.dart';
+import 'package:sw_fun_app/core/navigation/route_names.dart';
 import 'package:sw_fun_app/features/overview/presentation/widgets/grid_item_box.dart';
 
-class OverviewaPage extends StatelessWidget {
-  const OverviewaPage({super.key});
+class OverviewPage extends StatelessWidget {
+  const OverviewPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +48,33 @@ class OverviewaPage extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              children: const [
-                GridItemBox(title: 'Peoples'),
-                GridItemBox(title: 'Planets'),
-                GridItemBox(title: 'Films'),
-                GridItemBox(title: 'Species'),
-                GridItemBox(title: 'Vehicles'),
-                GridItemBox(title: 'Starships'),
+              children: [
+                GridItemBox(
+                  title: 'Peoples',
+                  onTap: () {
+                    context.push(peoplesRoute);
+                  },
+                ),
+                GridItemBox(
+                  title: 'Planets',
+                  onTap: () {},
+                ),
+                GridItemBox(
+                  title: 'Films',
+                  onTap: () {},
+                ),
+                GridItemBox(
+                  title: 'Species',
+                  onTap: () {},
+                ),
+                GridItemBox(
+                  title: 'Vehicles',
+                  onTap: () {},
+                ),
+                GridItemBox(
+                  title: 'Starships',
+                  onTap: () {},
+                ),
               ],
             ),
           ),
