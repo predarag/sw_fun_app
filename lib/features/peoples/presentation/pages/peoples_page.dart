@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
 import 'package:sw_fun_app/features/peoples/presentation/widgets/info_row.dart';
+import 'package:sw_fun_app/features/peoples/presentation/widgets/people_details.dart';
+import 'package:sw_fun_app/injection_container.dart';
 
 class PeoplesPage extends StatefulWidget {
   const PeoplesPage({super.key});
@@ -43,53 +45,19 @@ class _PeoplesPageState extends State<PeoplesPage> {
               );
             }
             if (state is PeoplesLoadedState) {
-              return Expanded(
+              return NotificationListener<ScrollNotification>(
+                onNotification: (notification) =>
+                    _handleScrollNotification(notification, state.hasNext),
                 child: ListView.separated(
-                    itemBuilder: (context, index) {
-                      return Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                state.peoplesResponseModel.results[index].name,
-                                style: Theme.of(context).textTheme.headline4,
-                              ),
-                              SizedBox(
-                                height: 10.h,
-                              ),
-                              InfoRow(
-                                name: 'height',
-                                value: state
-                                    .peoplesResponseModel.results[index].height,
-                              ),
-                              InfoRow(
-                                name: 'mass',
-                                value: state
-                                    .peoplesResponseModel.results[index].mass,
-                              ),
-                              InfoRow(
-                                name: 'skin color',
-                                value: state.peoplesResponseModel.results[index]
-                                        .skinColor ??
-                                    'n/a',
-                              ),
-                              InfoRow(
-                                name: 'gender',
-                                value: state.peoplesResponseModel.results[index]
-                                        .gender ??
-                                    'n/a',
-                              ),
-                            ],
-                          ));
-                    },
-                    separatorBuilder: (context, index) => const Divider(),
-                    itemCount: state.peoplesResponseModel.results.length),
+                  controller: _scrollController,
+                  itemBuilder: (context, index) {
+                    return PeopleDetail(peopleModel: state.peoples[index]);
+                  },
+                  separatorBuilder: (context, index) => SizedBox(
+                    height: 10.h,
+                  ),
+                  itemCount: state.peoples.length,
+                ),
               );
             }
             return Container();
@@ -97,5 +65,16 @@ class _PeoplesPageState extends State<PeoplesPage> {
         ),
       ),
     );
+  }
+
+  bool _handleScrollNotification(
+      ScrollNotification notification, bool hasNext) {
+    if (notification is ScrollEndNotification &&
+        _scrollController.position.extentAfter == 0 &&
+        hasNext) {
+      locator<PeoplesBloc>().add(const FetchPeoplesEvent(isInitialCall: false));
+    }
+
+    return false;
   }
 }

@@ -12,12 +12,18 @@ class PeoplesInitial extends PeoplesState {}
 class PeoplesLoadingState extends PeoplesState {}
 
 class PeoplesLoadedState extends PeoplesState {
-  final PeoplesResponseModel peoplesResponseModel;
+  final List<PeopleModel> peoples;
+  final bool isLoading;
+  final bool hasNext;
 
-  const PeoplesLoadedState(this.peoplesResponseModel);
+  const PeoplesLoadedState({
+    required this.peoples,
+    required this.hasNext,
+    this.isLoading = false,
+  });
 
   @override
-  List<Object> get props => [peoplesResponseModel];
+  List<Object> get props => [peoples, isLoading];
 }
 
 class PeoplesErrorState extends PeoplesState {}

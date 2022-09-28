@@ -7,4 +7,8 @@ abstract class PeoplesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FetchPeoplesEvent extends PeoplesEvent {}
+class FetchPeoplesEvent extends PeoplesEvent {
+  final bool isInitialCall;
+
+  const FetchPeoplesEvent({this.isInitialCall = true});
+}
