@@ -14,12 +14,6 @@ class BuildConfig {
       case Environment.dev:
         _config = _Config.devConstants;
         break;
-      case Environment.preprod:
-        // TODO: Handle this case.
-        break;
-      case Environment.prod:
-        // TODO: Handle this case.
-        break;
     }
   }
 

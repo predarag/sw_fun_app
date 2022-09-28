@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
-import 'package:sw_fun_app/features/peoples/presentation/widgets/info_row.dart';
 import 'package:sw_fun_app/features/peoples/presentation/widgets/people_details.dart';
 import 'package:sw_fun_app/injection_container.dart';
 

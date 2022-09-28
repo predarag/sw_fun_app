@@ -54,7 +54,7 @@ class OverviewPage extends StatelessWidget {
                 GridItemBox(
                   title: 'Peoples',
                   onTap: () {
-                    locator<PeoplesBloc>().add(FetchPeoplesEvent());
+                    locator<PeoplesBloc>().add(const FetchPeoplesEvent());
                     context.push(peoplesRoute);
                   },
                 ),

@@ -1,1 +1,1 @@
-enum Environment { dev, preprod, prod }
+enum Environment { dev }

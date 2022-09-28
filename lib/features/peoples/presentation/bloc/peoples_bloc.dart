@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:sw_fun_app/features/peoples/data/models/people_model.dart';
-import 'package:sw_fun_app/features/peoples/data/models/peoples_response_model.dart';
 import 'package:sw_fun_app/features/peoples/domain/interactor/peoples_interactor.dart';
 
 part 'peoples_event.dart';
