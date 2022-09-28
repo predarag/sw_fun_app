@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sw_fun_app/core/navigation/route_names.dart';
 import 'package:sw_fun_app/features/overview/presentation/widgets/grid_item_box.dart';
+import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
+import 'package:sw_fun_app/injection_container.dart';
 
 class OverviewPage extends StatelessWidget {
   const OverviewPage({super.key});
@@ -52,6 +54,7 @@ class OverviewPage extends StatelessWidget {
                 GridItemBox(
                   title: 'Peoples',
                   onTap: () {
+                    locator<PeoplesBloc>().add(FetchPeoplesEvent());
                     context.push(peoplesRoute);
                   },
                 ),

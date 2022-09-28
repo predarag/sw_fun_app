@@ -35,6 +35,6 @@ class _Config {
   // add other fields
 
   static const Map<String, String> devConstants = <String, String>{
-    baseUrl: 'https://plug-inn-api-gawbvj7awa-uc.a.run.app/pluginn/v1/',
+    baseUrl: 'https://swapi.dev/api',
   };
 }
