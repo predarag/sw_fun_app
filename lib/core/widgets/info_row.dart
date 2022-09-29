@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class InfoRow extends StatelessWidget {
   final String name;
@@ -11,17 +12,30 @@ class InfoRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
       children: [
-        Text(
-          name,
-          style: Theme.of(context).textTheme.headline4,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Text(
+                name,
+                style: Theme.of(context).textTheme.headline4,
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Text(
+                value,
+                style: Theme.of(context).textTheme.headline3,
+              ),
+            ),
+          ],
         ),
-        Text(
-          value,
-          style: Theme.of(context).textTheme.headline3,
-        ),
+        SizedBox(
+          height: 5.h,
+        )
       ],
     );
   }

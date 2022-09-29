@@ -31,7 +31,7 @@ Future<void> init() async {
   locator.registerLazySingleton(
     () => PeoplesBloc(peoplesIntercator: locator()),
   );
-    locator.registerLazySingleton(
+  locator.registerLazySingleton(
     () => PlanetsBloc(planetsIntercator: locator()),
   );
 

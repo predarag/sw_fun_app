@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sw_fun_app/core/widgets/base_app_bar.dart';
 import 'package:sw_fun_app/core/widgets/infinity_scroll_list.dart';
 import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
 import 'package:sw_fun_app/features/peoples/presentation/widgets/people_details.dart';
@@ -11,15 +12,9 @@ class PeoplesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black, //change your color here
-        ),
-        backgroundColor: Theme.of(context).canvasColor,
-        title: Text(
-          'Peoples',
-          style: Theme.of(context).textTheme.headline5,
-        ),
+      appBar: BaseAppBar(
+        title: 'Peoples',
+        appbar: AppBar(),
       ),
       body: Container(
         padding: const EdgeInsets.all(16),

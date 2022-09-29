@@ -13,10 +13,10 @@ class PlanetsBloc extends Bloc<PlanetsEvent, PlanetsState> {
   PlanetsBloc({required PlanetsIntercator planetsIntercator})
       : _planetsIntercator = planetsIntercator,
         super(PlanetsInitial()) {
-    on<FetchPlanetsEvent>(fetchPeoples);
+    on<FetchPlanetsEvent>(fetchPlanets);
   }
 
-  Future<void> fetchPeoples(
+  Future<void> fetchPlanets(
       FetchPlanetsEvent event, Emitter<PlanetsState> emit) async {
     if (event.isInitialCall) {
       emit(PlanetsLoadingState());
