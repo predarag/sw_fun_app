@@ -28,6 +28,7 @@ class PeoplesPage extends StatelessWidget {
             if (state is PeoplesLoadedState) {
               return InfinityScrollList(
                 hasNext: state.hasNext,
+                isLoading: state.isLoading,
                 items: state.peoples
                     .map((detail) => PeopleDetail(peopleModel: detail))
                     .toList(),

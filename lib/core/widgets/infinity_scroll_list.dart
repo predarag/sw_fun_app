@@ -6,11 +6,13 @@ class InfinityScrollList extends StatelessWidget {
 
   final List<Widget> items;
   final bool hasNext;
+  final bool isLoading;
   final Function loadNext;
 
   InfinityScrollList({
     required this.items,
     required this.hasNext,
+    required this.isLoading,
     required this.loadNext,
     super.key,
   });
@@ -23,12 +25,17 @@ class InfinityScrollList extends StatelessWidget {
       child: ListView.separated(
         controller: _scrollController,
         itemBuilder: (context, index) {
+          if (index >= items.length) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
           return items[index];
         },
         separatorBuilder: (context, index) => SizedBox(
           height: 10.h,
         ),
-        itemCount: items.length,
+        itemCount: isLoading ? items.length + 1 : items.length,
       ),
     );
   }

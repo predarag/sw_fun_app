@@ -28,6 +28,7 @@ class PlanetsPage extends StatelessWidget {
             if (state is PlanetsLoadedState) {
               return InfinityScrollList(
                 hasNext: state.hasNext,
+                isLoading: state.isLoading,
                 items: state.planets
                     .map((detail) => PlanetDetail(planetModel: detail))
                     .toList(),
