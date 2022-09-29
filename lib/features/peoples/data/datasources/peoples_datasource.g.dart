@@ -19,13 +19,13 @@ class _PeoplesDataSource implements PeoplesDataSource {
   String? baseUrl;
 
   @override
-  Future<PeoplesResponseModel> getPeoples(page) async {
+  Future<BaseResponseModel<PeopleModel>> getPeoples(page) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<PeoplesResponseModel>(Options(
+        _setStreamType<BaseResponseModel<PeopleModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -37,7 +37,8 @@ class _PeoplesDataSource implements PeoplesDataSource {
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = PeoplesResponseModel.fromJson(_result.data!);
+    final value = BaseResponseModel<PeopleModel>.fromJson(
+        _result.data!, PeopleModel.fromJson);
     return value;
   }
 
