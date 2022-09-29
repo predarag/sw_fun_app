@@ -17,7 +17,6 @@ class InfinityScrollList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(items.length);
     return NotificationListener<ScrollNotification>(
       onNotification: (notification) =>
           _handleScrollNotification(notification, hasNext),

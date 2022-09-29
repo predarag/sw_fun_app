@@ -22,4 +22,16 @@ class PeoplesRepositoryImpl extends BaseReposiotry<PeopleModel> {
       return Left(ServerFailure(message: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, BaseResponseModel<PeopleModel>>> searchCollection(
+      String param) async {
+    try {
+      final result = await dataSource.searchCollection(
+          'people', param, PeopleModel.fromJson);
+      return Right(result);
+    } on DioError catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
 }

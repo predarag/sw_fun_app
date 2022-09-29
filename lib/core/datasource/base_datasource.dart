@@ -10,7 +10,15 @@ abstract class BaseDataSource<T> {
 
   @GET('/{collection}/')
   Future<BaseResponseModel<T>> getCollection(
-      @Path('collection') String collection,
-      @Query('page') int page,
-      Function fromJson);
+    @Path('collection') String collection,
+    @Query('page') int page,
+    Function fromJson,
+  );
+
+  @GET('/{collection}/')
+  Future<BaseResponseModel<T>> searchCollection(
+    @Path('collection') String collection,
+    @Query('search') String serachParam,
+    Function fromJson,
+  );
 }

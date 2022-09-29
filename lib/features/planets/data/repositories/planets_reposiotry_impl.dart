@@ -22,4 +22,16 @@ class PlanetsRepositoryImpl extends BaseReposiotry<PlanetModel> {
       return Left(ServerFailure(message: e.message));
     }
   }
+
+  @override
+  Future<Either<Failure, BaseResponseModel<PlanetModel>>> searchCollection(
+      String param) async {
+    try {
+      final result = await dataSource.searchCollection(
+          'planets', param, PlanetModel.fromJson);
+      return Right(result);
+    } on DioError catch (e) {
+      return Left(ServerFailure(message: e.message));
+    }
+  }
 }

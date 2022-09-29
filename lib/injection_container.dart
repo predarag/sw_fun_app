@@ -12,6 +12,8 @@ import 'package:sw_fun_app/features/planets/data/models/planet_model.dart';
 import 'package:sw_fun_app/features/planets/data/repositories/planets_reposiotry_impl.dart';
 import 'package:sw_fun_app/features/planets/domain/interactor/planets_interactor.dart';
 import 'package:sw_fun_app/features/planets/presentation/bloc/planets_bloc.dart';
+import 'package:sw_fun_app/features/search_collections/domain/interactor/search_collection_interactor.dart';
+import 'package:sw_fun_app/features/search_collections/presentation/bloc/search_collections_bloc.dart';
 
 final locator = GetIt.instance;
 
@@ -33,6 +35,10 @@ Future<void> init() async {
   );
   locator.registerLazySingleton(
     () => PlanetsBloc(planetsIntercator: locator()),
+  );
+
+  locator.registerLazySingleton(
+    () => SearchCollectionsBloc(searchInteractor: locator()),
   );
 
   //repository
@@ -59,4 +65,6 @@ Future<void> init() async {
   //interactors
   locator.registerLazySingleton(() => PeoplesIntercator(repository: locator()));
   locator.registerLazySingleton(() => PlanetsIntercator(repository: locator()));
+  locator.registerLazySingleton(() => SearchCollectionInteractor(
+      peopleRepository: locator(), planetsRepository: locator()));
 }

@@ -7,6 +7,7 @@ import 'package:sw_fun_app/features/films/presentation/bloc/films_bloc.dart';
 import 'package:sw_fun_app/features/overview/presentation/bloc/overview_bloc.dart';
 import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
 import 'package:sw_fun_app/features/planets/presentation/bloc/planets_bloc.dart';
+import 'package:sw_fun_app/features/search_collections/presentation/bloc/search_collections_bloc.dart';
 import 'package:sw_fun_app/injection_container.dart' as di;
 
 Future<void> mainDelegate() async {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: ((_) => di.locator<PeoplesBloc>())),
         BlocProvider(create: ((_) => di.locator<PlanetsBloc>())),
         BlocProvider(create: ((_) => di.locator<FilmsBloc>())),
+        BlocProvider(create: ((_) => di.locator<SearchCollectionsBloc>())),
       ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp.router(
