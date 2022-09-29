@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:sw_fun_app/core/navigation/route_names.dart';
 import 'package:sw_fun_app/features/overview/presentation/widgets/grid_item_box.dart';
 import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
+import 'package:sw_fun_app/features/planets/presentation/bloc/planets_bloc.dart';
 import 'package:sw_fun_app/injection_container.dart';
 
 class OverviewPage extends StatelessWidget {
@@ -60,7 +61,10 @@ class OverviewPage extends StatelessWidget {
                 ),
                 GridItemBox(
                   title: 'Planets',
-                  onTap: () {},
+                  onTap: () {
+                    locator<PlanetsBloc>().add(const FetchPlanetsEvent());
+                    context.push(planetsRoute);
+                  },
                 ),
                 GridItemBox(
                   title: 'Films',

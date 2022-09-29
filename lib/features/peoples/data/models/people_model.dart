@@ -1,9 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:sw_fun_app/core/model/base_model.dart';
 
 part 'people_model.g.dart';
 
 @JsonSerializable()
-class PeopleModel {
+class PeopleModel extends BaseModel {
   PeopleModel({
     required this.name,
     required this.height,

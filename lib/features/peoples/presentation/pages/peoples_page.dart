@@ -1,25 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sw_fun_app/core/widgets/infinity_scroll_list.dart';
 import 'package:sw_fun_app/features/peoples/presentation/bloc/peoples_bloc.dart';
 import 'package:sw_fun_app/features/peoples/presentation/widgets/people_details.dart';
 import 'package:sw_fun_app/injection_container.dart';
 
-class PeoplesPage extends StatefulWidget {
+class PeoplesPage extends StatelessWidget {
   const PeoplesPage({super.key});
-
-  @override
-  State<PeoplesPage> createState() => _PeoplesPageState();
-}
-
-class _PeoplesPageState extends State<PeoplesPage> {
-  final _scrollController = ScrollController();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +31,15 @@ class _PeoplesPageState extends State<PeoplesPage> {
               );
             }
             if (state is PeoplesLoadedState) {
-              return NotificationListener<ScrollNotification>(
-                onNotification: (notification) =>
-                    _handleScrollNotification(notification, state.hasNext),
-                child: ListView.separated(
-                  controller: _scrollController,
-                  itemBuilder: (context, index) {
-                    return PeopleDetail(peopleModel: state.peoples[index]);
-                  },
-                  separatorBuilder: (context, index) => SizedBox(
-                    height: 10.h,
-                  ),
-                  itemCount: state.peoples.length,
-                ),
+              return InfinityScrollList(
+                hasNext: state.hasNext,
+                items: state.peoples
+                    .map((detail) => PeopleDetail(peopleModel: detail))
+                    .toList(),
+                loadNext: () {
+                  locator<PeoplesBloc>()
+                      .add(const FetchPeoplesEvent(isInitialCall: false));
+                },
               );
             }
             return Container();
@@ -64,16 +47,5 @@ class _PeoplesPageState extends State<PeoplesPage> {
         ),
       ),
     );
-  }
-
-  bool _handleScrollNotification(
-      ScrollNotification notification, bool hasNext) {
-    if (notification is ScrollEndNotification &&
-        _scrollController.position.extentAfter == 0 &&
-        hasNext) {
-      locator<PeoplesBloc>().add(const FetchPeoplesEvent(isInitialCall: false));
-    }
-
-    return false;
   }
 }

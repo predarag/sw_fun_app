@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'peoples_datasource.dart';
+part of 'base_datasource.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'peoples_datasource.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _PeoplesDataSource implements PeoplesDataSource {
-  _PeoplesDataSource(
+class _BaseDataSource<T> implements BaseDataSource<T> {
+  _BaseDataSource(
     this._dio, {
     this.baseUrl,
   });
@@ -19,26 +19,29 @@ class _PeoplesDataSource implements PeoplesDataSource {
   String? baseUrl;
 
   @override
-  Future<BaseResponseModel<PeopleModel>> getPeoples(page) async {
+  Future<BaseResponseModel<T>> getCollection(
+    collection,
+    page,
+    fromJson,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BaseResponseModel<PeopleModel>>(Options(
+        _setStreamType<BaseResponseModel<T>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/people/',
+              '/${collection}/',
               queryParameters: queryParameters,
               data: _data,
             )
             .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = BaseResponseModel<PeopleModel>.fromJson(
-        _result.data!, PeopleModel.fromJson);
+    final value = BaseResponseModel<T>.fromJson(_result.data!, fromJson);
     return value;
   }
 

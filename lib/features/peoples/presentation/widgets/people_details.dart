@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sw_fun_app/features/peoples/data/models/people_model.dart';
-import 'package:sw_fun_app/features/peoples/presentation/widgets/info_row.dart';
+import 'package:sw_fun_app/core/widgets/info_row.dart';
 
 class PeopleDetail extends StatelessWidget {
   final PeopleModel peopleModel;
