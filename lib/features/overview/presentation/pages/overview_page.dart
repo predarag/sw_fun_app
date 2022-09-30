@@ -71,15 +71,37 @@ class OverviewPage extends StatelessWidget {
                 ),
                 GridItemBox(
                   title: 'Species',
-                  onTap: () {},
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Species are comming soon, stay tuned!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
                 GridItemBox(
                   title: 'Vehicles',
-                  onTap: () {},
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Vehicles are comming soon, stay tuned!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
                 GridItemBox(
                   title: 'Starships',
-                  onTap: () {},
+                  onTap: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content:
+                            Text('Starships are comming soon, stay tuned!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
