@@ -6,3 +6,9 @@ abstract class FilmsEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchFilmsEvent extends FilmsEvent {
+  final bool isInitialCall;
+
+  const FetchFilmsEvent({this.isInitialCall = true});
+}

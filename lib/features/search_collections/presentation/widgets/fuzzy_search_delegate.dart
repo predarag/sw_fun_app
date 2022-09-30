@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sw_fun_app/core/model/base_model.dart';
 import 'package:sw_fun_app/core/navigation/route_names.dart';
+import 'package:sw_fun_app/features/films/data/models/film_model.dart';
+import 'package:sw_fun_app/features/films/presentation/widgets/film_details.dart';
 import 'package:sw_fun_app/features/peoples/data/models/people_model.dart';
 import 'package:sw_fun_app/features/peoples/presentation/widgets/people_details.dart';
 import 'package:sw_fun_app/features/planets/data/models/planet_model.dart';
@@ -103,6 +105,17 @@ class FuzzySearchDelegate extends SearchDelegate {
           },
           title: Text(model.name),
           subtitle: const Text('category: planet'));
+    }
+    if (model is FilmModel) {
+      return ListTile(
+          onTap: () {
+            context.push(
+              detailsRoute,
+              extra: FilmDetail(filmModel: model),
+            );
+          },
+          title: Text(model.title),
+          subtitle: const Text('category: film'));
     }
     return Container();
   }

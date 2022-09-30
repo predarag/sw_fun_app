@@ -3,17 +3,19 @@ import 'package:sw_fun_app/core/error/failure.dart';
 import 'package:sw_fun_app/core/extensions/either.dart';
 import 'package:sw_fun_app/core/model/base_model.dart';
 import 'package:sw_fun_app/core/repository/base_repository.dart';
+import 'package:sw_fun_app/features/films/data/models/film_model.dart';
 import 'package:sw_fun_app/features/peoples/data/models/people_model.dart';
 import 'package:sw_fun_app/features/planets/data/models/planet_model.dart';
 
 class SearchCollectionInteractor {
   final BaseReposiotry<PeopleModel> peopleRepository;
   final BaseReposiotry<PlanetModel> planetsRepository;
+  final BaseReposiotry<FilmModel> filmsRepository;
 
-  SearchCollectionInteractor({
-    required this.peopleRepository,
-    required this.planetsRepository,
-  });
+  SearchCollectionInteractor(
+      {required this.peopleRepository,
+      required this.planetsRepository,
+      required this.filmsRepository});
 
   Future<Either<Failure, List<BaseModel>>> searchCollections(
       String param) async {
@@ -21,13 +23,17 @@ class SearchCollectionInteractor {
     try {
       final response = await Future.wait([
         peopleRepository.searchCollection(param),
-        planetsRepository.searchCollection(param)
+        planetsRepository.searchCollection(param),
+        filmsRepository.searchCollection(param)
       ]);
       if (response[0].isRight()) {
         searchResult.addAll(response[0].asRight().results);
       }
       if (response[1].isRight()) {
         searchResult.addAll(response[1].asRight().results);
+      }
+      if (response[2].isRight()) {
+        searchResult.addAll(response[2].asRight().results);
       }
 
       return Right(searchResult);

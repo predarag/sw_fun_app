@@ -16,7 +16,7 @@ class SearchCollectionsBloc
         super(SearchCollectionsInitial()) {
     on<QueryCollectionEvent>(search, transformer: (events, mapper) {
       return events
-          .debounceTime(const Duration(seconds: 1))
+          .debounceTime(const Duration(milliseconds: 500))
           .asyncExpand(mapper);
     });
     on<ResetSearchCollectionsEvent>(resetSearch);

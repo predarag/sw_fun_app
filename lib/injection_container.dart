@@ -3,6 +3,10 @@ import 'package:get_it/get_it.dart';
 import 'package:sw_fun_app/core/config/build_config.dart';
 import 'package:sw_fun_app/core/datasource/base_datasource.dart';
 import 'package:sw_fun_app/core/repository/base_repository.dart';
+import 'package:sw_fun_app/features/films/data/models/film_model.dart';
+import 'package:sw_fun_app/features/films/data/repositories/films_repository_impl.dart';
+import 'package:sw_fun_app/features/films/domain/interactor/films_interactor.dart';
+import 'package:sw_fun_app/features/films/presentation/bloc/films_bloc.dart';
 import 'package:sw_fun_app/features/overview/presentation/bloc/overview_bloc.dart';
 import 'package:sw_fun_app/features/peoples/data/models/people_model.dart';
 import 'package:sw_fun_app/features/peoples/data/repositories/peoples_reposiotry_impl.dart';
@@ -36,6 +40,9 @@ Future<void> init() async {
   locator.registerLazySingleton(
     () => PlanetsBloc(planetsIntercator: locator()),
   );
+  locator.registerLazySingleton(
+    () => FilmsBloc(filmsIntercator: locator()),
+  );
 
   locator.registerLazySingleton(
     () => SearchCollectionsBloc(searchInteractor: locator()),
@@ -46,6 +53,8 @@ Future<void> init() async {
       () => PeoplesRepositoryImpl(dataSource: locator()));
   locator.registerLazySingleton<BaseReposiotry<PlanetModel>>(
       () => PlanetsRepositoryImpl(dataSource: locator()));
+  locator.registerLazySingleton<BaseReposiotry<FilmModel>>(
+      () => FilmsRepositoryImpl(dataSource: locator()));
 
   //datasource
   locator.registerLazySingleton(
@@ -62,9 +71,20 @@ Future<void> init() async {
     ),
   );
 
+  locator.registerLazySingleton(
+    () => BaseDataSource<FilmModel>(
+      locator(),
+      baseUrl: BuildConfig().baseUrl!,
+    ),
+  );
+
   //interactors
   locator.registerLazySingleton(() => PeoplesIntercator(repository: locator()));
   locator.registerLazySingleton(() => PlanetsIntercator(repository: locator()));
+  locator.registerLazySingleton(() => FilmsIntercator(repository: locator()));
   locator.registerLazySingleton(() => SearchCollectionInteractor(
-      peopleRepository: locator(), planetsRepository: locator()));
+        peopleRepository: locator(),
+        planetsRepository: locator(),
+        filmsRepository: locator(),
+      ));
 }
